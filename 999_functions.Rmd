@@ -1,0 +1,33 @@
+---
+title: "999_functions"
+author: "Puvvula"
+date: "2023-08-07"
+output: pdf_document
+---
+
+#load multiple sas files from a folder
+```{r}
+load_sas_files <- function(folder_path) {
+  # List all the SAS files in the folder with the .sas7bdat extension
+  sas_files <- list.files(path = folder_path, pattern = "\\.sas7bdat$", full.names = TRUE)
+  
+  # Create an empty list to store the data frames
+  sas_data <- list()
+  
+  # Load each SAS file into the list and name it using the original file name
+  for (file in sas_files) {
+    file_name <- sub("\\.sas7bdat$", "", basename(file))
+    sas_data[[file_name]] <- read_sas(file)
+  }
+  
+  # Assign each element of the list to a separate object in the global environment
+  for (i in seq_along(sas_data)) {
+    assign(names(sas_data)[i], sas_data[[i]], envir = globalenv())
+  }
+  
+  # Return the list of data frames (optional)
+  return(sas_data)
+}
+
+```
+
