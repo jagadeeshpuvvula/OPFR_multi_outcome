@@ -1,0 +1,17 @@
+---
+title: "01_multi_outcome"
+author: "Puvvula"
+date: "2023-08-07"
+output: pdf_document
+---
+
+```{r}
+library(pacman)
+pacman::p_load(tidyverse, janitor, haven, reshape2)
+data_loc <- "~/Documents/prenatal_OPFR/raw_data"
+```
+
+```{r}
+load_sas_files(data_loc)
+```
+
